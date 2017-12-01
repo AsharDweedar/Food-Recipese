@@ -15,29 +15,43 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <!-- jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.js"></script>
-    <!-- react-redux -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/5.0.6/react-redux.js"></script>
-
+    
   </head>
   <body>
     
     <!-- log in with fb -->
     <fb:login-button
-    scope="public_profile,email"
-    onlogin="checkLoginState();">
-  </fb:login-button>
-  <!-- log out with fb -->
-  <button onclick="logmeout()">logout - facebook</button>
-  <div id="container"></div>
-  
-  <!-- components -->
-  <script type="text/babel" src="./comp/something.jsx"></script>
-  <script type="text/babel" src="./comp/layout.jsx"></script>
-  <!-- main renderer -->
-  <script type="text/babel" src="./app.jsx"></script>
-  <!-- redux -->
-  <script type="text/babel" src="./redux.jsx"></script>
-  <something />
-  <Layout />
+      scope="public_profile,email"
+      onlogin="checkLoginState();">
+    </fb:login-button>
+    <!-- log out with fb -->
+    <button onclick="logmeout()">logout - facebook</button>
+    <div id="container"></div>
+    
+    <!-- components -->
+    <script type="text/babel" src="./comp/something.jsx"></script>
+    <script type="text/babel" src="./comp/layout.jsx"></script>
+    <!-- main renderer -->
+    <script type="text/babel" src="./app.jsx"></script>
+    
+    <!-- import for redux -->
+    <!-- redux -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.js"></script>
+    <!-- react-redux -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/5.0.6/react-redux.js"></script>
+    <!-- redux-logger -->
+    <script type="text/javascript" src="./node_modules/redux-logger/dist/redux-logger.js"></script>
+    <!-- redux-thunk -->
+    <script type="text/javascript" src="./node_modules/redux-thunk/dist/redux-thunk.js"></script>
+    <!-- redux-promise-middleware -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/redux-promise-middleware/5.0.0/redux-promise-middleware.js"></script>
+    <script type="text/babel">
+      const { createStore, combineReducers, applyMiddleware} = Redux;
+      const logger = reduxLogger.createLogger;
+      const thunk = ReduxThunk.default;
+      const promise = ReduxPromiseMiddleware.default;
+    </script>
+    <!-- redux - my code -->
+    <script type="text/babel" src="./redux.js"></script>
   </body>
 </html>

@@ -1,7 +1,4 @@
-const { createStore, combineReducers, applyMiddleware} = require("redux");
-const logger = require("redux-logger").createLogger;
-const thunk = require("redux-thunk").default;
-const promise = require("redux-promise-middleware").default;
+
 //PENDING , FULFILLED , REJECTED => if there is error 
 const middleWares = applyMiddleware(promise() ,thunk, logger())
 
@@ -15,7 +12,7 @@ const userReducer = function ( state = {
         name : "",
         password : "",
         fav : [],
-        
+
     }
 }, action ) {
     if (action.type === "DEF") {
