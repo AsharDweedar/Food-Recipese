@@ -9,7 +9,15 @@ const middleWares = applyMiddleware(promise() ,thunk, logger())
 /****************** userReducer *****************/
 /************************************************/
 
-const userReducer = function ( state = {}, action ) {
+const userReducer = function ( state = {
+    user : {
+        email : "",
+        name : "",
+        password : "",
+        fav : [],
+        
+    }
+}, action ) {
     if (action.type === "DEF") {
         state = Object.assign({},state, {user : action.user});
     }
