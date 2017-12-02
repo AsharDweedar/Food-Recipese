@@ -9,43 +9,41 @@ const middleWares = applyMiddleware(promise() ,thunk, logger())
 /****************** userReducer *****************/
 /************************************************/
 
-const userReducer = function (
-  state = {
-      email: "",
-      name: "",
-      password: "",
-      fav: [],
-      myRecipese: []
-  },
-  action
-) {
-    console.log('state : ');
-    console.log(state);
-  if (action.type === "DEF") {
-    state = Object.assign({}, state, { user: action.user });
-  }
+const userReducer = function (state, action) {
+    switch (action.type) {
+        case "DEF":
+            state = Object.assign({}, state, action.user );
+            break;
+        default:
+            state = { email: "", name: "", password: "", fav: [], myRecipes: [] };
+            break;
+    }
   return state;
 };
 
 /************************************************/
-/*************** recipeseReducer ****************/
+/*************** recipesReducer ****************/
 /************************************************/
 
-const recipeseReducer = function ( state = [] , action ) {
-    if (action.type === "ADD") {
-        state = state.concat(action.recipese);
+const recipesReducer = function ( state , action ) {
+    switch (action.type) {
+        case "ADD":
+            state = state.concat(action.recipes);
+            break;
+        default:
+            state = [];
+            break;
     }
     return state;
 }
 
-
 /************************************************/
-/******************** reducers ******************/
+/************* combine reducers *****************/
 /************************************************/
 
 const reducer = combineReducers({
     user: userReducer,
-    recipese : recipeseReducer
+    recipes : recipesReducer
 });
 
 /************************************************/
@@ -58,13 +56,37 @@ store.subscribe(() => {
 })
 
 /************************************************/
-/******************** actions *******************/
+/***************** user actions *****************/
 /************************************************/
-
-//promise will work here 
-// store.dispatch({ type: "add", recipese: some aync function });
 //thunk will work here 
-store.dispatch((dis) => {
-    dis({ type: "DEF", user: {name: "name of user2" } })
-    dis({ type: "DEF", user: {name: "name of user3" } })
-});
+//store.dispatch((dis) => {
+    //     dis({ type: "DEF", user: {name: "name of user2" } })
+    //     dis({ type: "DEF", user: {name: "name of user3" } })
+    // });
+
+const recipesActions = {
+  create: recipes => {
+    //do something to send it to firebase
+    return { type: "create", recipes: recipes };
+  },
+  comment: comment => {
+    //do something to send it to firebase
+    return { type: "comment", comment: comment };
+  }
+};
+    
+    
+/************************************************/
+/***************** user actions *****************/
+/************************************************/
+//promise will work here 
+// store.dispatch({ type: "add", recipes: some aync function });
+
+const userActions = {
+  addToFav: recipes => {
+    return { type: "addToFav", fav: recipes };
+  },
+  addToRecipes: recipes => {
+    return { type: "addToFav", myRecipes: recipes };
+  }
+};

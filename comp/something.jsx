@@ -2,7 +2,7 @@ window.something = React.createClass({
   render: function() {
     return (
       <h1>
-          Food Recipese App
+          Food Recipes App
       </h1>
     );
   }
