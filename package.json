@@ -24,8 +24,6 @@
   },
   "homepage": "https://github.com/AsharDweedar/Food-Recipese#readme",
   "devDependencies": {
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
   },
   "dependencies": {
   }
