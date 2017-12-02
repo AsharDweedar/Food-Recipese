@@ -1,10 +1,9 @@
 
 class signup extends React.Component {
   constructor(props) {
-    console.log("props : ");
+    console.log("props signup: ");
     console.log(props);
     super(props);
-    this.state = {...props};
   }
 
   submit () {
@@ -13,7 +12,7 @@ class signup extends React.Component {
     var pass = $("#name").val()
     console.log('submitted');
     //TODO : submit to firebase;
-    props.show("showSignIn")
+    this.props.show("showSignIn")
   }
  
   render() {
@@ -28,12 +27,3 @@ class signup extends React.Component {
       </div>;
   }
 }
-connect((store, ownProps) => {
-  //whatever i return here it will be sent as props
-  return {
-    ...ownProps,
-    email: "",
-    password: "",
-    name: "",
-  };
-})(signup);

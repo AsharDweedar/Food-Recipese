@@ -65,10 +65,6 @@ store.subscribe(() => {
     // });
 
 const recipesActions = {
-  create: recipes => {
-    //do something to send it to firebase
-    return { type: "create", recipes: recipes };
-  },
   comment: comment => {
     //do something to send it to firebase
     return { type: "comment", comment: comment };

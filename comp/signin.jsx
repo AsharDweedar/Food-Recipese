@@ -11,7 +11,7 @@ class signin extends React.Component {
     var pass = $("#pass").val();
     console.log("submitted sign in");
     //TODO : submit to firebase;
-    props.show("showRecipesPage");
+    this.props.show("showRecipesPage");
   }
 
   render() {
@@ -26,12 +26,3 @@ class signin extends React.Component {
     </div>
   }
 }
-const connect = ReactRedux.connect;
-connect((store, ownProps) => {
-  //whatever i return here it will be sent as props
-  return {
-    ...ownProps,
-    email: "",
-    password: "",
-  };
-})(signin);
