@@ -22,7 +22,7 @@ class signup extends React.Component {
           <input placeholder="Name" id = "name" ></input>
           <input placeholder="Email" id = "email" ></input>
           <input placeholder="Password" id = "pass" ></input>
-          <button onClick={this.submit} >click to submit</button>
+          <button onClick={this.submit.bind(this)} >click to submit</button>
         </form>
       </div>;
   }

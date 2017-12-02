@@ -14,6 +14,10 @@ const userReducer = function (state, action) {
         case "DEF":
             state = Object.assign({}, state, action.user );
             break;
+        case "OUT":
+            state = Object.assign({}, state, {signedIn : false} );
+            //log out 
+            break;
         default:
             state = { email: "", name: "", password: "", fav: [], myRecipes: [] };
             break;

@@ -3,10 +3,13 @@ class recomendations extends React.Component {
     super(props);
     console.log("props recomendations : ");
     console.log(props);
-    this.state = { ...props };
   }
 
   render() {
-    return <div>recomendations Component</div>;
+    var list = [];
+    for (var recomendation of this.props.recomendations) {
+      list.push(<li> {recomendation} </li>);
+    }
+    return <div>{list}</div>;
   }
 }
