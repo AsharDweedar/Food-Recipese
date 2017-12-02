@@ -10,7 +10,12 @@ window.fbAsyncInit = function () {
   FB.AppEvents.logPageView();
   
 };
-
+//check if he is already signed in with facebook
+function checkLoginState () {
+  FB.getLoginStatus((response) => {
+    return response.state === "connected";
+  });
+}
 
 (function (d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
