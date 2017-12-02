@@ -1,25 +1,31 @@
-
-//PENDING , FULFILLED , REJECTED => if there is error 
+const { createStore, combineReducers, applyMiddleware } = Redux;
+const logger = reduxLogger.createLogger;
+const thunk = ReduxThunk.default;
+const promise = ReduxPromiseMiddleware.default;
+//PENDING , FULFILLED , REJECTED => if there is error (the promise)
 const middleWares = applyMiddleware(promise() ,thunk, logger())
 
 /************************************************/
 /****************** userReducer *****************/
 /************************************************/
 
-const userReducer = function ( state = {
-    user : {
-        email : "",
-        name : "",
-        password : "",
-        fav : [],
-
-    }
-}, action ) {
-    if (action.type === "DEF") {
-        state = Object.assign({},state, {user : action.user});
-    }
-    return state;
-}
+const userReducer = function (
+  state = {
+      email: "",
+      name: "",
+      password: "",
+      fav: [],
+      myRecipese: []
+  },
+  action
+) {
+    console.log('state : ');
+    console.log(state);
+  if (action.type === "DEF") {
+    state = Object.assign({}, state, { user: action.user });
+  }
+  return state;
+};
 
 /************************************************/
 /*************** recipeseReducer ****************/
@@ -34,7 +40,7 @@ const recipeseReducer = function ( state = [] , action ) {
 
 
 /************************************************/
-/******************** reducer *******************/
+/******************** reducers ******************/
 /************************************************/
 
 const reducer = combineReducers({
@@ -57,7 +63,7 @@ store.subscribe(() => {
 
 //promise will work here 
 // store.dispatch({ type: "add", recipese: some aync function });
-//using thunk
+//thunk will work here 
 store.dispatch((dis) => {
     dis({ type: "DEF", user: {name: "name of user2" } })
     dis({ type: "DEF", user: {name: "name of user3" } })
