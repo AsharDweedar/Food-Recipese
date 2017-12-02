@@ -1,39 +1,23 @@
 
-class Layout extends React.Component {
+class recipes extends React.Component {
   constructor(props) {
+    super(props);
     console.log("props : ");
     console.log(props);
-    super(props);
-    this.state = {
-      showSignUp : false,
-      showSignIn : false,
-      showRecipes : false,
-      showRecipesPage : false,
-      showRecomendations : false,
-      current : "showRecipesPage",
+    if (props.recipes)
+      this.state = {...props};
+    else 
+      this.state.recipes = ["test 1","test 2","test 3","test 4","test 5",];
+    //TODO : fetch data from firebase & store it at :
+    //this.setState(res)
+  }
+ 
+  render () {
+    var list = ['<ul>'];
+    for (var recipe of this.state.recipes) {
+      list.push('<li onClick="this.props.show(recipe)">recipe</li>');
     }
-    // debugger;
-  }
-  toShow (show) {
-    //conditional rendering
-    this.state[current] = false; //change the currently shown tab to false => will be hided
-    this.state.current = show; //the passed value is now the cuurrent
-    this.state[show] = true; //the passed value is now true => will be shown 
-  }
-  render() {
-    return <div>
-        Hello world, this is <window.something>
-          inside something
-        </window.something>
-      </div>;
+    list.push("</ul>")
+    return <div> list </div>;
   }
 }
-// debugger;
-console.log('before connect');
-const connect = ReactRedux.connect;
-connect((store, ownProps) => {
-  console.log('hi this is my store : ');
-  console.log(store );
-  //whatever i return here it will be sent as props
-  return { name: "name is here !" };
-})(Layout);

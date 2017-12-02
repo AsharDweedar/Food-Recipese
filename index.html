@@ -26,10 +26,7 @@
       crossorigin="anonymous"></script> -->
   </head>
   <body>
-    <!-- log in with fb -->
-    <fb:login-button
-      scope="public_profile,email"
-      onlogin="checkLoginState();">
+    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
     </fb:login-button>
     <!-- log out with fb -->
     <button onclick="logmeout()">logout - facebook</button>
@@ -50,13 +47,12 @@
     <script type="text/babel" src="./redux.js"></script>
     
     <!-- components -->
-    <script type="text/babel" src="./comp/something.jsx"></script>
-    <script type="text/babel" src="./comp/layout.jsx"></script>
     <script type="text/babel" src="./comp/recipepage.jsx"></script>
     <script type="text/babel" src="./comp/recipes.jsx"></script>
     <script type="text/babel" src="./comp/signin.jsx"></script>
     <script type="text/babel" src="./comp/signup.jsx"></script>
     <script type="text/babel" src="./comp/recomendations.jsx"></script>
+    <script type="text/babel" src="./comp/layout.jsx"></script>
     <!-- main renderer -->
     <script type="text/babel" src="./app.jsx"></script>
     

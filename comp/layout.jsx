@@ -5,8 +5,8 @@ class Layout extends React.Component {
     console.log(props);
     super(props);
     this.state = {
-      showSignUp : false,
-      showSignIn : true,
+      showSignUp : true,
+      showSignIn : false,
       showRecipes : false,
       showRecipesPage : false,
       showRecomendations : false,
@@ -21,22 +21,17 @@ class Layout extends React.Component {
   }
   render() {
     return <div>
-      
-        { this.state.showSignUp && <signup /> }
-        { this.state.showSignIn && <signin /> }
-        { this.state.showRecipes && <recipes /> }
-        { this.state.showRecipesPage && <recipepage /> }
-        { this.state.showRecomendations && <recomendations /> }
-        Hello world, this is <window.something
-        >
-          inside something
-        </window.something>
+        {this.state.showSignUp && <window.signup />}
+        {this.state.showSignIn && <window.signin />}
+        {this.state.showRecipes && <window.recipes />}
+        {this.state.showRecipesPage && <window.recipepage />}
+        {this.state.showRecomendations && <window.recomendations />}
       </div>;
   }
 }
 // debugger;
 console.log('before connect');
-const connect = ReactRedux.connect;
+// const connect = ReactRedux.connect;
 connect((store, ownProps) => {
   console.log('hi this is my store : ');
   console.log(store );

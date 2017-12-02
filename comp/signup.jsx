@@ -1,39 +1,39 @@
 
-class Layout extends React.Component {
+class signup extends React.Component {
   constructor(props) {
     console.log("props : ");
     console.log(props);
     super(props);
-    this.state = {
-      showSignUp : false,
-      showSignIn : false,
-      showRecipes : false,
-      showRecipesPage : false,
-      showRecomendations : false,
-      current : "showRecipesPage",
-    }
-    // debugger;
+    this.state = {...props};
   }
-  toShow (show) {
-    //conditional rendering
-    this.state[current] = false; //change the currently shown tab to false => will be hided
-    this.state.current = show; //the passed value is now the cuurrent
-    this.state[show] = true; //the passed value is now true => will be shown 
+
+  submit () {
+    var email = $("#email").val()
+    var pass = $("#pass").val()
+    var pass = $("#name").val()
+    console.log('submitted');
+    //TODO : submit to firebase;
+    props.show("showSignIn")
   }
+ 
   render() {
     return <div>
-        Hello world, this is <window.something>
-          inside something
-        </window.something>
+        <form>
+          <legend>sign up Component</legend>
+          <input placeholder="Name" id = "name" ></input>
+          <input placeholder="Email" id = "email" ></input>
+          <input placeholder="Password" id = "pass" ></input>
+          <button onClick={this.submit} >click to submit</button>
+        </form>
       </div>;
   }
 }
-// debugger;
-console.log('before connect');
-const connect = ReactRedux.connect;
 connect((store, ownProps) => {
-  console.log('hi this is my store : ');
-  console.log(store );
   //whatever i return here it will be sent as props
-  return { name: "name is here !" };
-})(Layout);
+  return {
+    ...ownProps,
+    email: "",
+    password: "",
+    name: "",
+  };
+})(signup);
