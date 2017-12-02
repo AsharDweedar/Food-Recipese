@@ -1,4 +1,6 @@
 var { Provider } = window.ReactRedux;
+console.log('store :');
+console.log(store);
 $(document).ready(function() {
   ReactDOM.render(
     <Provider store={store}>
