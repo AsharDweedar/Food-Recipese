@@ -2,7 +2,9 @@
   <head>
     <meta charset="UTF-8">
     <title>food recipes</title>
-    
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+      crossorigin="anonymous">
     <!-- facebook -->
     <script src="./scripts/facebook.js"></script>
     <!-- firebase -->
@@ -15,10 +17,15 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <!-- jquery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.js"></script>
-    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+      crossorigin="anonymous"></script> -->
   </head>
   <body>
-    
     <!-- log in with fb -->
     <fb:login-button
       scope="public_profile,email"
@@ -27,6 +34,7 @@
     <!-- log out with fb -->
     <button onclick="logmeout()">logout - facebook</button>
     <div id="container"></div>
+
     <!-- import for redux -->
     <!-- redux -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.js"></script>
@@ -44,6 +52,11 @@
     <!-- components -->
     <script type="text/babel" src="./comp/something.jsx"></script>
     <script type="text/babel" src="./comp/layout.jsx"></script>
+    <script type="text/babel" src="./comp/recipepage.jsx"></script>
+    <script type="text/babel" src="./comp/recipes.jsx"></script>
+    <script type="text/babel" src="./comp/signin.jsx"></script>
+    <script type="text/babel" src="./comp/signup.jsx"></script>
+    <script type="text/babel" src="./comp/recomendations.jsx"></script>
     <!-- main renderer -->
     <script type="text/babel" src="./app.jsx"></script>
     

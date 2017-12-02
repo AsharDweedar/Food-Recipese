@@ -1,3 +1,12 @@
 //import { Provider } from "react-redux"
 var { Provider } = window.ReactRedux;
-ReactDOM.render(<Provider store = {store} ><window.Layout /></Provider>, document.getElementById("container"));
+$(document).ready(function() {
+    // debugger;
+    console.log('before rendering')
+  ReactDOM.render(
+    <Provider store={store}>
+      <Layout />
+    </Provider>,
+    document.getElementById("container")
+  );
+}); 

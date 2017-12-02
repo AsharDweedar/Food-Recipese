@@ -12,8 +12,12 @@ For Firebase database use any simple data you create just 2 to 5 recipes.
 user => email , pass, name , [fav] , [recipes], 
 recipes => [comments{auth, comm}], creator, [ingrediants], name, preparing, time
 
-pages => sign up / sign in / recipes
-
+pages =>
+    sign up
+    sign in
+    Home Page => recipes
+    Recipe Page =>  add comments , add the recipes to his/her favorites
+    recommendations => names for recommended recipes 
 
     "babel-cli": "^6.6.5",
     "babel-preset-es2015": "^6.6.0",
