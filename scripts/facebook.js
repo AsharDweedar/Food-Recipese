@@ -14,9 +14,9 @@ window.fbAsyncInit = function () {
 function checkLoginState () {
   return FB.getLoginStatus((response) => {
     console.log(response)
-    window.isLoggedIn = response.state === "connected";
+    window.isLoggedIn = response.status === "connected";
     console.log(window.isLoggedIn);
-    return response.state === "connected";
+    return response.status === "connected";
   });
 }
 
