@@ -1,8 +1,6 @@
 
 class Layout extends React.Component {
   constructor(props) {
-    console.log("props Layout : ");
-    console.log(props);
     super(props);
     this.state = {
       showSignUp: false,
@@ -10,37 +8,61 @@ class Layout extends React.Component {
       showRecipes: false,
       showRecipePage: false,
       showRecomendations: false,
-      isLoggedIn: window.isLoggedIn || true ,
+      isLoggedIn: window.isLoggedIn || false ,
       current: "showSignIn",
       recipe: "",
       recipes: ["... fetching recipes", "... fetching recipes", "... fetching recipes"],
-      recomendations: ['rec', 'rec1', 'rec2']
+      recomendations: ['rec', 'rec1', 'rec2'],
+      user: {}
     };
-    //TODO : fetch data from firebase & store it at :
+    console.log("state Layout : ");
+    console.log(this.state);
+    var st = this.state;
+    //fetch data from firebase & store it at :
     firebase
       .database()
       .ref("/recipese/")
       .once("value")
       .then(function(recipes) {
-        console.log(Array.isArray(recipes.val()));
-        window.recipes = recipes.val().slice(1);
+        var all = [];
+        recipes.forEach(recipe => {
+          let rec = recipe.val();
+          rec.id = recipe.key;
+          all.push(rec);
+        });
+        st.recipes = all;
       });
-    if (window.recipes) {
-      console.log(window.recipes);
-      console.log(window.recipes[0]);
-      console.log(window.recipes[0].name);
-      this.state.recipes = window.recipes;
-    }
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        st.isLoggedIn = true;
+        st.user = user
+      } else {
+        st.isLoggedIn = false;
+        st.user = {};
+      }
+    });
+
   }
   
   logout () {
-    if (this.state.isLoggedIn) {
+    var st = this.state;
+    if (st.isLoggedIn) {
       // check if he is already signed in with facebook
       FB.getLoginStatus((response) => {
-        if (response.state === "connected") {
-          return logmeout();
+        if (response.status === "connected") {
+          console.log(response)
+          logmeout();
         } else {
-          //TODO : log out from firebase
+          firebase
+            .auth()
+            .signOut()
+            .then(function() {
+              console.log("Sign-out successful");
+              st.setState({ isLoggedIn: false });
+            })
+            .catch(function({ message }) {
+              alert(message);
+            });
         }
       });
     } else {
@@ -56,7 +78,8 @@ class Layout extends React.Component {
       this.state.recipe = prop;
     }
     if (show === "showRecipes" && prop) {
-      this.state.isLoggedIn = prop;
+      this.state.isLoggedIn = true;
+      this.state.user = prop;
     }
     //conditional rendering
     this.state[show] = true; //the passed value is now true => will be shown 
@@ -108,7 +131,7 @@ class Layout extends React.Component {
                 <li onClick={() => this.toShow("showSignUp")} className="showSignUp">
                   <a href="#">sign up</a>
                 </li>
-                <li onClick={() => logmeout()}>
+                <li onClick={() => this.logout()}>
                   <a href="#">sign out</a>
                 </li>
               </ul>
@@ -118,16 +141,16 @@ class Layout extends React.Component {
         {this.state.showSignUp && <window.signup show={this.toShow.bind(this)} />}
         {this.state.showSignIn && <window.signin show={this.toShow.bind(this)} />}
         {this.state.showRecipes && <window.recipes recipes={this.state.recipes} show={this.toShow.bind(this)} />}
-        {this.state.showRecipePage && <window.recipepage recipe={this.state.recipe} isLoggedIn={this.state.isLoggedIn} />}
+        {this.state.showRecipePage && <window.recipepage recipe={this.state.recipe} isLoggedIn={this.state.isLoggedIn} user={this.state.user} />}
         {this.state.showRecomendations && <window.recomendations recomendations={this.state.recomendations} />}
       </div>;
   }
 }
-console.log('before connect');
-const connect = ReactRedux.connect;
-connect((store, ownProps) => {
-  console.log('hi this is my store : ');
-  console.log(store );
-  //whatever i return here it will be sent as props
-  return { name: "name is here !" };
-})(Layout);
+// console.log('before connect');
+// const connect = ReactRedux.connect;
+// connect((store, ownProps) => {
+//   console.log('hi this is my store : ');
+//   console.log(store );
+//   //whatever i return here it will be sent as props
+//   return { name: "name is here !" };
+// })(Layout);

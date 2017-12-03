@@ -13,6 +13,7 @@ window.fbAsyncInit = function () {
 //check if he is already signed in with facebook
 function checkLoginState () {
   return FB.getLoginStatus((response) => {
+    console.log("response : ")
     console.log(response)
     console.log(response.status);
     window.isLoggedIn = response.status === "connected";
@@ -32,7 +33,7 @@ function checkLoginState () {
 
 //log out function ...
 function logmeout () {
-  console.log('inside log out ')
+  console.log('inside log out of facebook');
   FB.logout(function (response) {
     // user is now logged out
     console.log('logged out ');

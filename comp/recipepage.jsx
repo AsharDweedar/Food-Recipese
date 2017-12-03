@@ -5,18 +5,24 @@ class recipepage extends React.Component {
     console.log(props);
     super(props);
     this.state = { ...props.recipe }
-    console.log(this.state)
   }
-  subcomment() {
+  subcomment () {
+    var st = this.state;
     var comm = $("#comm").val();
-    // var send = { auth: "this user from store using connect or props", comment: comm };
-    //TODO : add the comment to firebase
-    //TODO : add comment to current recipe page
-      //like : this.state.comments.push(send)
+    var email = this.props.user.email;
+    var co = { auth: email, comment: comm };
+    st.comments.push(co);
+    firebase
+      .database()
+      .ref("recipese/" + this.state.id)
+      .update(st)
+      .catch(({ message }) => {
+        console.log(message);
+      });
   }
   addfav() {
-    //TODO : add the comment to firebase
     
+
   }
   render() {
     if (!this.props.recipe) {
@@ -36,7 +42,7 @@ class recipepage extends React.Component {
                     Add to favourit
                   </a>}
                   <hr/>
-                {this.props.isLoggedIn && <div><input type="text" className="form-control" placeholder="add comment" /><p></p><button type="submit" className="btn btn-default" onClick={this.subcomment}>Comment</button></div>}
+                {this.props.isLoggedIn && <div><input id="comm" type="text" className="form-control" placeholder="add comment" /><p></p><button type="submit" className="btn btn-default" onClick={this.subcomment.bind(this)}>Comment</button></div>}
             </div>
           </div>
         </div>

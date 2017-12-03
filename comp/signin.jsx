@@ -14,8 +14,10 @@ class signin extends React.Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        this.props.show("showRecipes", true);
+      .then((user) => {
+        console.log('user : ')
+        console.log(user)
+        this.props.show("showRecipes", user.uid);
       })
       .catch(function({ message }) {
         alert(message);
