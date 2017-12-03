@@ -4,26 +4,35 @@ class recipepage extends React.Component {
     console.log("props recipepage : ");
     console.log(props);
     super(props);
-    this.state = { ...props.recipe }
+    this.state = { ...props.recipe , user : props.user }
   }
   subcomment () {
     var st = this.state;
     var comm = $("#comm").val();
-    var email = this.props.user.email;
-    var co = { auth: email, comment: comm };
+    var displayName = st.user.displayName;
+    var co = { auth: displayName, comment: comm };
     st.comments.push(co);
     firebase
       .database()
-      .ref("recipese/" + this.state.id)
+      .ref("recipese/" + st.id)
       .update(st)
       .catch(({ message }) => {
         console.log(message);
       });
-  }
-  addfav() {
+    }
     
-
+  addfav() {
+    var st = this.state;
+    st.user.fav.push(st.recipe.name);
+    firebase
+      .database()
+      .ref("users/" + this.state.user.id)
+      .update(st.user)
+      .catch(({ message }) => {
+        console.log(message);
+      });
   }
+
   render() {
     if (!this.props.recipe) {
       return <div className="alert alert-warning" role="alert">

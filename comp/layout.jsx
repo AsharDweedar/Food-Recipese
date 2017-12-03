@@ -11,7 +11,7 @@ class Layout extends React.Component {
       isLoggedIn: window.isLoggedIn || false ,
       current: "showSignIn",
       recipe: "",
-      recipes: ["... fetching recipes", "... fetching recipes", "... fetching recipes"],
+      recipes: [{name : "... fetching recipes"}, {name : "... fetching recipes"}, {name : "... fetching recipes"}],
       recomendations: ['rec', 'rec1', 'rec2'],
       user: {}
     };

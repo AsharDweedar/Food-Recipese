@@ -16,11 +16,15 @@ class signup extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(email, pass)
       .then((user) => {
-        console.log(user);
-        // firebase
-        //   .database()
-        //   .ref("users/" + user.id)
-        //   .set(send);
+        var user = firebase.auth().currentUser;
+        user
+          .updateProfile({ displayName: name, A: ["tea"] })
+          .then(function() {
+            // Update successful.
+          })
+          .catch(function({message}) {
+            console.log(message);
+          });
         this.props.show("showSignIn");
       })
       .catch(function({ message }) {

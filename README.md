@@ -9,7 +9,7 @@ Make the code clean, simple and non repeatable.
 
 For Firebase database use any simple data you create just 2 to 5 recipes.
 
-user => email , pass, name , [fav] , [recipes], 
+user => email , pass, name , [fav]  
 recipes => [comments{auth, comm}], creator, [ingrediants], name, preparing, time
 
 pages =>

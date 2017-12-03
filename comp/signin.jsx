@@ -17,7 +17,7 @@ class signin extends React.Component {
       .then((user) => {
         console.log('user : ')
         console.log(user)
-        this.props.show("showRecipes", user.uid);
+        this.props.show("showRecipes", user);
       })
       .catch(function({ message }) {
         alert(message);
