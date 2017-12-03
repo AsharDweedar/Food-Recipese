@@ -9,16 +9,18 @@ class recipes extends React.Component {
   render () {
     var list = [];
     for (var recipe of this.props.recipes) {
-      list.push(<li
-          onClick={() => this.props.show("showRecipePage", recipe)}
-        >
-          {" "}
-          recipe{" "}
-        </li>);
+      list.push(<div className="row" width = "40%"onClick={() => this.props.show("showRecipePage", recipe)}>
+        <div className="col-sm-6 col-md-4">
+          <div className="thumbnail">
+            <div className="caption">
+              <h3>{recipe.name}</h3>
+            </div>
+          </div>
+        </div>
+      </div>);
     }
-    return <div><ul>
+    return <div>
       {list}
-      </ul>
     </div>;
   }
 }

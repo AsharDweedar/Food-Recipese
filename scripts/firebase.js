@@ -8,15 +8,15 @@ var config = {
   messagingSenderId: "751614730997"
 };
 firebase.initializeApp(config);
-/*
+/* 
 var recipese = {
-  name: "test name",
+  name: "test 2 name",
   time: "02:00",
-  ingrediants: ["milk", "sugar", "water"],
-  preparing: "preparing stuff",
+  ingrediants: ["tea", "sugar", "water"],
+  preparing: "preparing stuff, preparing stuff, preparing stuff.",
   comments: [{ auth: "Ashar Dweedar", comm: "please eat !!" }]
 };
-var ID = 1;
+var ID = 2;
 var path = firebase.database().ref("recipese/" + ID);
 path
   .set(recipese)
@@ -24,8 +24,8 @@ path
     console.log("success " + stng);
   })
   .catch(({ message }) => console.log("failed" + message));
-*/
 
+ */
 
 
 

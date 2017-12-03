@@ -29,10 +29,14 @@
       crossorigin="anonymous"></script>
   </head>
   <body>
-    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-    </fb:login-button>
-    <!-- log out with fb -->
-    <button onclick="logmeout()">logout - facebook</button>
+    <nav className="navbar navbar-inverse">
+      <div className="container-fluid">
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+        <!-- log out with fb -->
+        <button onclick="logmeout()">logout - facebook</button>
+      </div>
+    </nav>
     <div id="container"></div>
 
     <!-- import for redux -->

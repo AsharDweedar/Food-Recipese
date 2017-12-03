@@ -4,7 +4,8 @@ class recipepage extends React.Component {
     console.log("props recipepage : ");
     console.log(props);
     super(props);
-    this.state = { recipe : props.recipe }
+    this.state = { ...props.recipe }
+    console.log(this.state)
   }
   subcomment() {
     var comm = $("#comm").val();
@@ -15,34 +16,30 @@ class recipepage extends React.Component {
   }
   addfav() {
     //TODO : add the comment to firebase
+    
   }
   render() {
     if (!this.props.recipe) {
-      return <div class="alert alert-warning" role="alert">
+      return <div className="alert alert-warning" role="alert">
           no recipe selected !!
         </div>;
     }
-    return <div>
-        <address> {this.state.recipe} </address>
-        <div class="jumbotron">
-          <h1>{this.state.recipe} </h1>
-          <p>
-            {this.state.recipe} {this.state.recipe} {this.state.recipe}{" "}
-          </p>
-          <p>
-            {this.props.isLoggedIn && <a class="btn btn-primary btn-lg" href="#" role="button" onClick={this.addfav}>
-                Add to favourit
-              </a>}
-          </p>
-        </div>
-        {this.props.isLoggedIn && <form className="navbar-form navbar-left" role="search">
-            <div className="form-group">
-              <input type="text" className="form-control" placeholder="add comment" />
+    return <div className="row" >
+        <div className="col-sm-6 col-md-4">
+          <div className="thumbnail">
+            <div className="caption">
+              <h3>{this.state.name}</h3>
+              <p>
+                {this.state.preperation}
+              </p>
+                {this.props.isLoggedIn && <a className="btn btn-primary btn-lg" href="#" role="button" onClick={this.addfav}>
+                    Add to favourit
+                  </a>}
+                  <hr/>
+                {this.props.isLoggedIn && <div><input type="text" className="form-control" placeholder="add comment" /><p></p><button type="submit" className="btn btn-default" onClick={this.subcomment}>Comment</button></div>}
             </div>
-            <button type="submit" className="btn btn-default" onClick={this.subcomment}>
-              comment
-            </button>
-          </form>}
+          </div>
+        </div>
       </div>;
   }
 }

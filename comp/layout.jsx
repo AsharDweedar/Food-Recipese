@@ -10,16 +10,27 @@ class Layout extends React.Component {
       showRecipes: false,
       showRecipePage: false,
       showRecomendations: false,
-      isLoggedIn: false,
+      isLoggedIn: window.isLoggedIn || true ,
       current: "showSignIn",
-      recipe:"",
-      recipes: ["test 1", "test 2", "test 3", "test 4", "test 5"],
+      recipe: "",
+      recipes: ["... fetching recipes", "... fetching recipes", "... fetching recipes"],
       recomendations: ['rec', 'rec1', 'rec2']
     };
     //TODO : fetch data from firebase & store it at :
-
-    //this.state.recipes = props.recipes;
-    //this.setState(res)
+    firebase
+      .database()
+      .ref("/recipese/")
+      .once("value")
+      .then(function(recipes) {
+        console.log(Array.isArray(recipes.val()));
+        window.recipes = recipes.val().slice(1);
+      });
+    if (window.recipes) {
+      console.log(window.recipes);
+      console.log(window.recipes[0]);
+      console.log(window.recipes[0].name);
+      this.state.recipes = window.recipes;
+    }
   }
   
   logout () {
@@ -36,6 +47,7 @@ class Layout extends React.Component {
       alert('You are not signed in');
     }
   }
+
   toShow (show, prop) {
     //switch the active tab of the nav bar : styling purposes 
     $("#bs-example-navbar-collapse-1 li." + show).toggleClass("active");
@@ -51,6 +63,7 @@ class Layout extends React.Component {
     this.state[this.state.current] = false; //change the currently shown tab to false => will be hided
     this.setState({ current: show }); //the passed value is now the cuurrent
   }
+
   render() {
     return <div>
         <nav className="navbar navbar-inverse">
@@ -65,15 +78,15 @@ class Layout extends React.Component {
 
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul className="nav navbar-nav">
-                <li onClick={() => this.toShow("showRecipes").bind(this)} className="showRecipes">
+                <li onClick={() => this.toShow("showRecipes")} className="showRecipes">
                   <a href="#">Recipes</a>
                 </li>
-                <li onClick={() => this.toShow("showRecipePage").bind(this)} className="showRecipePage">
+                <li onClick={() => this.toShow("showRecipePage")} className="showRecipePage">
                   <a href="#">
                     Recipe Page <span className="sr-only" />
                   </a>
                 </li>
-                <li onClick={() => this.toShow("showRecomendations").bind(this)} className="showRecomendations">
+                <li onClick={() => this.toShow("showRecomendations")} className="showRecomendations">
                   <a href="#">
                     Recomendations <span className="sr-only" />
                   </a>
@@ -89,10 +102,10 @@ class Layout extends React.Component {
                 </button>
               </form>
               <ul className="nav navbar-nav navbar-right">
-                <li onClick={() => this.toShow("showSignIn").bind(this)} className="showSignIn active">
+                <li onClick={() => this.toShow("showSignIn")} className="showSignIn active">
                   <a href="#">sign in</a>
                 </li>
-                <li onClick={() => this.toShow("showSignUp").bind(this)} className="showSignUp">
+                <li onClick={() => this.toShow("showSignUp")} className="showSignUp">
                   <a href="#">sign up</a>
                 </li>
                 <li onClick={() => logmeout()}>
