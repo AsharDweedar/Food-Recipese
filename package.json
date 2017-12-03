@@ -1,5 +1,5 @@
 {
-  "name": "frindture.food_recipes.as-har_dweedar",
+  "name": "frindture.food_recipes",
   "version": "1.0.0",
   "description": "task",
   "main": "index.js",
@@ -17,7 +17,7 @@
     "food",
     "Recipese"
   ],
-  "author": "Ashar Dweedar",
+  "author": "As-har Dweedar",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AsharDweedar/Food-Recipese/issues"

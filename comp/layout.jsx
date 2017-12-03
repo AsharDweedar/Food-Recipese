@@ -8,39 +8,48 @@ class Layout extends React.Component {
       showSignUp: false,
       showSignIn: true,
       showRecipes: false,
-      showRecipesPage: false,
+      showRecipePage: false,
       showRecomendations: false,
+      isLoggedIn: false,
       current: "showSignIn",
       recipe:"",
       recipes: ["test 1", "test 2", "test 3", "test 4", "test 5"],
       recomendations: ['rec', 'rec1', 'rec2']
     };
     //TODO : fetch data from firebase & store it at :
+
     //this.state.recipes = props.recipes;
     //this.setState(res)
   }
   
   logout () {
-    // check if he is already signed in with facebook
-    FB.getLoginStatus((response) => {
-      if (response.state === "connected") {
-        return logmeout();
-      } else {
-        //TODO : log out from firebase
-      }
-    });
+    if (this.state.isLoggedIn) {
+      // check if he is already signed in with facebook
+      FB.getLoginStatus((response) => {
+        if (response.state === "connected") {
+          return logmeout();
+        } else {
+          //TODO : log out from firebase
+        }
+      });
+    } else {
+      alert('You are not signed in');
+    }
   }
   toShow (show, prop) {
-    //conditional rendering
-    console.log("showing : ", show)
+    //switch the active tab of the nav bar : styling purposes 
     $("#bs-example-navbar-collapse-1 li." + show).toggleClass("active");
     $("#bs-example-navbar-collapse-1 li." + this.state.current).toggleClass("active");
-    this.state[show] = true; //the passed value is now true => will be shown 
-    this.state[this.state.current] = false; //change the currently shown tab to false => will be hided
-    this.setState({ current: show }); //the passed value is now the cuurrent
     if (show === "showRecipePage") {
       this.state.recipe = prop;
     }
+    if (show === "showRecipes" && prop) {
+      this.state.isLoggedIn = prop;
+    }
+    //conditional rendering
+    this.state[show] = true; //the passed value is now true => will be shown 
+    this.state[this.state.current] = false; //change the currently shown tab to false => will be hided
+    this.setState({ current: show }); //the passed value is now the cuurrent
   }
   render() {
     return <div>
@@ -58,6 +67,11 @@ class Layout extends React.Component {
               <ul className="nav navbar-nav">
                 <li onClick={() => this.toShow("showRecipes").bind(this)} className="showRecipes">
                   <a href="#">Recipes</a>
+                </li>
+                <li onClick={() => this.toShow("showRecipePage").bind(this)} className="showRecipePage">
+                  <a href="#">
+                    Recipe Page <span className="sr-only" />
+                  </a>
                 </li>
                 <li onClick={() => this.toShow("showRecomendations").bind(this)} className="showRecomendations">
                   <a href="#">
@@ -91,7 +105,7 @@ class Layout extends React.Component {
         {this.state.showSignUp && <window.signup show={this.toShow.bind(this)} />}
         {this.state.showSignIn && <window.signin show={this.toShow.bind(this)} />}
         {this.state.showRecipes && <window.recipes recipes={this.state.recipes} show={this.toShow.bind(this)} />}
-        {this.state.showRecipesPage && <window.recipepage recipe={this.state.recipe} />}
+        {this.state.showRecipePage && <window.recipepage recipe={this.state.recipe} isLoggedIn={this.state.isLoggedIn} />}
         {this.state.showRecomendations && <window.recomendations recomendations={this.state.recomendations} />}
       </div>;
   }

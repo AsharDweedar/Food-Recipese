@@ -24,19 +24,25 @@ class recipepage extends React.Component {
     }
     return <div>
         <address> {this.state.recipe} </address>
-
-        <form className="navbar-form navbar-left" role="search">
-          <div className="form-group">
-            <input type="text" className="form-control" placeholder="add comment" />
-          </div>
-          <button type="submit" className="btn btn-default" onClick={this.subcomment}>
-            comment
-          </button>
-          <button className="btn btn-default" onClick={this.addfav}>
-            {" "}
-            Add to favourit
-          </button>
-        </form>
+        <div class="jumbotron">
+          <h1>{this.state.recipe} </h1>
+          <p>
+            {this.state.recipe} {this.state.recipe} {this.state.recipe}{" "}
+          </p>
+          <p>
+            {this.props.isLoggedIn && <a class="btn btn-primary btn-lg" href="#" role="button" onClick={this.addfav}>
+                Add to favourit
+              </a>}
+          </p>
+        </div>
+        {this.props.isLoggedIn && <form className="navbar-form navbar-left" role="search">
+            <div className="form-group">
+              <input type="text" className="form-control" placeholder="add comment" />
+            </div>
+            <button type="submit" className="btn btn-default" onClick={this.subcomment}>
+              comment
+            </button>
+          </form>}
       </div>;
   }
 }

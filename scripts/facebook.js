@@ -12,7 +12,9 @@ window.fbAsyncInit = function () {
 };
 //check if he is already signed in with facebook
 function checkLoginState () {
-  FB.getLoginStatus((response) => {
+  return FB.getLoginStatus((response) => {
+    window.isLoggedIn = response.state === "connected";
+    console.log(window.isLoggedIn);
     return response.state === "connected";
   });
 }

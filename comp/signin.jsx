@@ -11,13 +11,21 @@ class signin extends React.Component {
     var pass = $("#pass").val();
     console.log("submitted sign in");
     //TODO : submit to firebase;
-    this.props.show("showRecipes");
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, pass)
+      .then(() => {
+        this.props.show("showRecipes", true);
+      })
+      .catch(function({ message }) {
+        alert(message);
+      });
   }
 
   render() {
     return <div>
       <form>
-        <legend>sign In Component</legend>
+        <legend>sign In :</legend>
         <input placeholder="email" id="email" />
         <input placeholder="password" id="pass" />
         <button onClick={this.submit.bind(this)}>click to submit</button>

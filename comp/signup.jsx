@@ -12,7 +12,15 @@ class signup extends React.Component {
     var pass = $("#name").val()
     console.log('submitted');
     //TODO : submit to firebase;
-    this.props.show("showSignIn")
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, pass)
+      .then(() => {
+        this.props.show("showSignIn");
+      })
+      .catch(function({ message }) {
+        alert(message);
+      });
   }
  
   render() {

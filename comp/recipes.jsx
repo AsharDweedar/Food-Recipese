@@ -9,10 +9,16 @@ class recipes extends React.Component {
   render () {
     var list = [];
     for (var recipe of this.props.recipes) {
-      list.push(<window.recipepage onClick={() => this.props.show(recipe)} recipe={recipe} />);
+      list.push(<li
+          onClick={() => this.props.show("showRecipePage", recipe)}
+        >
+          {" "}
+          recipe{" "}
+        </li>);
     }
-    return <div>
+    return <div><ul>
       {list}
+      </ul>
     </div>;
   }
 }
