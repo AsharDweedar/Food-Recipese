@@ -7,8 +7,15 @@ class recomendations extends React.Component {
 
   render() {
     var list = [];
-    for (var recomendation of this.props.recomendations) {
-      list.push(<li> {recomendation} </li>);
+    for (var rec of this.props.recomendations) {
+      list.push(<div className="col-sm-6 col-md-4">
+          <div className="thumbnail">
+            <div className="caption">
+              <h3>{rec.text}</h3>
+              <h5>{rec.auth}</h5>
+            </div>
+          </div>
+        </div>);
     }
     return <div>{list}</div>;
   }

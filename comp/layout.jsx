@@ -12,13 +12,14 @@ class Layout extends React.Component {
       current: "showSignIn",
       recipe: "",
       recipes: [{name : "... fetching recipes"}, {name : "... fetching recipes"}, {name : "... fetching recipes"}],
-      recomendations: ['rec', 'rec1', 'rec2'],
+      recomendations: [{auth : 'default', text : 'rec'}, {auth : 'default', text : 'rec1'}, {auth : 'default', text : 'rec2'}],
       user: {}
     };
     console.log("state Layout : ");
     console.log(this.state);
     var st = this.state;
-    //fetch data from firebase & store it at :
+
+    //fetch recipes from firebase & store it at :
     firebase
       .database()
       .ref("/recipese/")
@@ -32,6 +33,23 @@ class Layout extends React.Component {
         });
         st.recipes = all;
       });
+    
+    //fetch recomendations from firebase & store it at :
+    firebase
+      .database()
+      .ref("/recomendations/")
+      .once("value")
+      .then(function(recomendations) {
+        var all = [];
+        recomendations.forEach(recomendation => {
+          let rec = recomendation.val();
+          rec.id = recomendation.key;
+          all.push(rec);
+        });
+        st.recomendations = all;
+      });
+    
+    //fetch current user data :
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         st.isLoggedIn = true;
@@ -68,6 +86,30 @@ class Layout extends React.Component {
     } else {
       alert('You are not signed in');
     }
+  }
+
+  subrec () {
+    var st = this.state;
+    var rec = $("#rec").val();
+    var displayName = st.user.displayName;
+    var co = { auth: displayName, text: rec };
+    var ID = firebase
+      .database()
+      .ref()
+      .child("recomendations")
+      .push().key;
+
+    var newRec = {};
+    newRec[ID] = co;
+
+    firebase
+      .database()
+      .ref("recomendations/")
+      .update(newRec)
+      .catch(({ message }) => {
+        console.log(message);
+      });
+
   }
 
   toShow (show, prop) {
@@ -117,10 +159,10 @@ class Layout extends React.Component {
               </ul>
               <form className="navbar-form navbar-left">
                 <div className="form-group">
-                  <input type="text" className="form-control" placeholder="recomend a recipe" />
+                  <input type="text" className="form-control" id="rec" placeholder="recomend a recipe" />
                 </div>
                 <span>{"          "}</span>
-                <button type="submit" className="btn btn-default">
+                <button type="submit" onClick={() => this.subrec("showSignUp")} className="btn btn-default">
                   Recomend
                 </button>
               </form>

@@ -19,7 +19,7 @@ class recipepage extends React.Component {
       .catch(({ message }) => {
         console.log(message);
       });
-    }
+  }
     
   addfav() {
     var st = this.state;

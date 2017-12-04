@@ -10,13 +10,13 @@ var config = {
 firebase.initializeApp(config);
 /* 
 var recipese = {
-  name: "test 2 name",
+  name: "how to make turtia",
   time: "02:00",
-  ingrediants: ["tea", "sugar", "water"],
-  preparing: "preparing stuff, preparing stuff, preparing stuff.",
+  ingrediants: ["flour", "water"],
+  preparing: "mix them and put on fire !",
   comments: [{ auth: "Ashar Dweedar", comm: "please eat !!" }]
 };
-var ID = 2;
+var ID = firebase.database().ref().child('recipese').push().key;
 var path = firebase.database().ref("recipese/" + ID);
 path
   .set(recipese)
