@@ -8,24 +8,24 @@ var config = {
   messagingSenderId: "751614730997"
 };
 firebase.initializeApp(config);
-/* 
-var recipese = {
-  name: "how to make turtia",
-  time: "02:00",
-  ingrediants: ["flour", "water"],
-  preparing: "mix them and put on fire !",
-  comments: [{ auth: "Ashar Dweedar", comm: "please eat !!" }]
-};
-var ID = firebase.database().ref().child('recipese').push().key;
-var path = firebase.database().ref("recipese/" + ID);
-path
-  .set(recipese)
-  .then(stng => {
-    console.log("success " + stng);
-  })
-  .catch(({ message }) => console.log("failed" + message));
 
- */
+// var recipese = {
+//   name: "how to make sandwish",
+//   time: "02:00",
+//   ingrediants: [{ingrediant : "bread", quantity : "1 Leaf"}, {ingrediant : "labaneh", quantity : "3 TS"}],
+//   preparing: "open the bread leaf then put the lananeh",
+//   comments: [{ auth: "Ashar Dweedar", comm: "you can eat it while drinkin juice" }]
+// };
+// var ID = firebase.database().ref().child('recipese').push().key;
+// var path = firebase.database().ref("recipese/" + ID);
+// path
+//   .set(recipese)
+//   .then(stng => {
+//     console.log("success " + stng);
+//   })
+//   .catch(({ message }) => console.log("failed" + message));
+
+
 
 
 
